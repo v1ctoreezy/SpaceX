@@ -17,7 +17,7 @@ struct RocketViewModel: View {
     ]
     
     var rocket: Rocket
-    var starts: [Launch]
+    var launch: [Launch]
     
     @State var showSettings: Bool = false
     @State var showStarts: Bool = false
@@ -35,12 +35,15 @@ struct RocketViewModel: View {
                 VStack {
                     Spacer(minLength: 60)
                     HStack {
+                        // Rocket label
                         Text(rocket.name)
                             .foregroundColor(.white)
                             .font(.title)
                             .fontWeight(.semibold)
+                        
                         Spacer()
                         
+                        //Settings Button rigth from rocket label
                         Button {
                             showSettings.toggle()
                         } label: {
@@ -64,11 +67,11 @@ struct RocketViewModel: View {
                                       load: $load,
                                       rocket: rocket)
                 Spacer(minLength: 40)
-                
+                //  MARK: Info Block
                 VStack {
                     InfoView(firstStart: transformDate(date: rocket.firstFlight),
                              country: countryTranslate[rocket.country]!,
-                             costOfStart: rocket.costPerLaunch)
+                             costOfStart: transformNumber(number: rocket.costPerLaunch))
                     Spacer(minLength: 50)
                     StageDataView(engCount: rocket.firstStage.engines,
                                   fielCount: String(rocket.firstStage.fuelAmountTons),
@@ -88,13 +91,17 @@ struct RocketViewModel: View {
                         .foregroundColor(.white)
                         .cornerRadius(20)
                         .fullScreenCover(isPresented: $showStarts) {
-                            LaunchViewModel(rocketName: rocket.name, launches: starts)
+                            LaunchViewModel(rocketName: rocket.name, launches: launch)
                         }
                     Spacer(minLength: 50)
                     
                 }.frame(width: 360)
             }
         }
+    }
+    
+    private func transformNumber(number: Int) -> Double {
+        return Double(number) / 1000000
     }
     
     private func transformDate(date: String) -> String {

@@ -12,8 +12,11 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if completeRocket.rockets.isEmpty {
+            if completeRocket.rockets.isEmpty || completeRocket.launches.isEmpty {
                 ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            .padding(1000)
+                            .background(.black)
             } else {
                 TabView {
                     ForEach(completeRocket.rockets) { rocket in
@@ -24,8 +27,11 @@ struct ContentView: View {
                 }.tabViewStyle(PageTabViewStyle())
                     .edgesIgnoringSafeArea(.top)
                     .background(.black)
+                    
             }
         }
+        //.animation(.easeIn(duration: 1))
+        
     }
 }
 

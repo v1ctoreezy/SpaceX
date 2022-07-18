@@ -10,7 +10,7 @@ import SwiftUI
 struct InfoView: View {
     var firstStart: String
     var country: String
-    var costOfStart: Int
+    var costOfStart: Double
     
     var body: some View {
         HStack {

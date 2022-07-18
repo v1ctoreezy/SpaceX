@@ -18,10 +18,6 @@ class CompleteRocket: NetWorkService, ObservableObject {
         getLaunches()
     }
     
-    func getImages() {
-        
-    }
-    
     func getRockets() {
         super.getData(url: "https://api.spacexdata.com/v4/rockets") { rockets in
             self.rockets = rockets

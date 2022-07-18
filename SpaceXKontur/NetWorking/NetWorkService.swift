@@ -36,7 +36,7 @@
 import Foundation
 
 class NetWorkService {
-    func getData<Type: Codable>(url: String, completion: @escaping ([Type]) -> ()){
+    func getData<Type: Codable> (url: String, completion: @escaping ([Type]) -> ()){
         guard let url = URL(string: url) else {
             return
         }
@@ -54,6 +54,25 @@ class NetWorkService {
             }
         }
         .resume()
+    }
+    
+//    func getData<Type: Codable> (url: String) async throws -> [Type] {
+//        let (data, response) = try await URLSession.shared.data(from: URL(string: url)!)
+//            guard let httpResponse = response as HTTPURLResponse,
+//                  httpResponse.statusCo
+//
+//        return [Type]
+//    }
+}
+
+enum APIService {
+    static func fetch<T: Decodable>(from url: URL) async throws -> [T] {
+        let (todoData, _) = try await URLSession.shared.data(from: url)
+        
+        let decoder = JSONDecoder()
+        let result = try decoder.decode([T].self, from: todoData)
+        
+        return result
     }
 }
 

@@ -13,21 +13,24 @@ struct MainViewModel: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(
-                url: URL(string: rocket.flickrImages[Int.random(in:0...rocket.flickrImages.count - 1)]),
-                content: { image in
+            AsyncImage(url: URL(string: rocket.flickrImages[Int.random(in:0...rocket.flickrImages.count - 1)]),
+                       scale: CGFloat(2),
+                       transaction: .init(animation: .easeIn)) { phase in
+                if let image = phase.image {
                     image
                         .resizable()
-                        .frame(height: 325)
-                }, placeholder: {
-                    ProgressView()
-                        .frame(height: 325)
-                })
+                        .frame(height: 400)
+                }
+                else {
+                    Color.black
+                        .frame(height: 400) //acts like placeholder
+                }
+            }
             RocketViewModel(
                 rocket: rocket,
-                starts: completeRocket.launchesFor(rocket)
+                launch: completeRocket.launchesFor(rocket)
             )
-            .offset(y: -30)
+            .offset(y: -50)
         }
     }
 }
