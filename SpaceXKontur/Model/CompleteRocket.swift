@@ -16,6 +16,7 @@ class CompleteRocket: NetWorkService, ObservableObject {
         super.init()
         getRockets()
         getLaunches()
+        
     }
     
     func getRockets() {
