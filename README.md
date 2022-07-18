@@ -1,1 +1,1 @@
-Implementation of a Kontur IOs test task. 
+Implementation of a Kontur iOS test task. 
