@@ -29,11 +29,11 @@ struct StageDataView: View {
     }
     
     var data: some View {
-        HStack {
+        VStack(alignment: .center, spacing: 20) {
+            Text("\(engCount)")
+                .foregroundColor(.white)
+                .font(.custom("Montserrat-SemiBold", size: 18))
             VStack(alignment: .center, spacing: 20) {
-                Text("\(engCount)")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 18))
                 HStack {
                     Text("\(fielCount)")
                         .foregroundColor(.white)
@@ -50,7 +50,6 @@ struct StageDataView: View {
                         .foregroundColor(.gray)
                         .fontWeight(.bold)
                 }
-                
             }
         }
     }
