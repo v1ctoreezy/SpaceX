@@ -14,24 +14,26 @@ struct ContentView: View {
         Group {
             if completeRocket.rockets.isEmpty || completeRocket.launches.isEmpty {
                 ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                            .padding(1000)
-                            .background(.black)
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                    .padding(1000)
+                    .background(.black)
             } else {
                 TabView {
                     ForEach(completeRocket.rockets) { rocket in
-                        ScrollView {
-                            MainViewModel(completeRocket: completeRocket, rocket: rocket)
-                        }.edgesIgnoringSafeArea(.top)
+                        VStack {
+                            ScrollView {
+                                MainViewModel(completeRocket: completeRocket, rocket: rocket)
+                            }.edgesIgnoringSafeArea(.top)
+                            Rectangle().foregroundColor(.black)
+                                .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .center)
+                        }
                     }
                 }.tabViewStyle(PageTabViewStyle())
                     .edgesIgnoringSafeArea(.top)
                     .background(.black)
-                    
             }
         }
         //.animation(.easeIn(duration: 1))
-        
     }
 }
 
